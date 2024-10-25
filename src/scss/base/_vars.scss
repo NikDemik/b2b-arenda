@@ -1,0 +1,24 @@
+:root {
+	--container-width: 100%;
+	--container-padding: 26px;
+
+	--font-main: "AeonikProTRIAL-Regular", sans-serif;
+	--font-accent: "AeonikProTRIAL-Bold", sans-serif;
+	--font-titles: var(--font-accent);
+
+	--page-bg: #F5F5F5;
+	--text-color: #0A1026;
+	--text-color-gray: #726F6F;
+	--accent: #55D6C9;
+	--link-color: #0A1026; 
+
+
+    --laptop-size: 1220px;
+	--tablet-size: 820px;
+	--mobile-size: 599px;
+}
+
+.dark {
+    --page-bg: #252526;
+    --text-color: #fff;
+}

@@ -1,0 +1,31 @@
+.title-1 {
+    margin-right: 40px;
+    font-family: var(--font-titles);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 100%;
+    color: #9BDED8;
+    text-transform: lowercase;
+    float: left;
+
+    animation-duration: 2s;
+    animation-name: fade-in;
+}
+
+.title-2 {
+    display: flex;
+    gap: 16px;
+    font-family: var(--font-titles);
+    font-weight: 700;
+    font-size: 58px;    
+}
+
+@keyframes fade-in{
+    from {
+        opacity: 0;
+    }
+    
+    to {
+        opacity: 1;
+    }
+}

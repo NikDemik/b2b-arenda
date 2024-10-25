@@ -1,0 +1,35 @@
+.header {
+	background-color: #F5F5F5;
+	padding: 20px 0;
+
+	&__row {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
+
+.header__left{
+	display: flex;
+	align-items: center;
+}
+
+.header__nav {
+	@include tablet {
+		display: none;
+	}
+}
+
+.contact-btn{
+	text-align: center;
+	text-transform: lowercase;
+
+	border: 2px solid var(--accent);
+	border-radius: 40px;
+	padding: 10px 20px 12px 20px;
+	background: var(--accent);
+
+	font-family: var(--font-accent);
+	font-weight: 700;
+	font-size: 20px;
+}

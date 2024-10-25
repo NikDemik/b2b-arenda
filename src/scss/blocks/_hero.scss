@@ -1,0 +1,82 @@
+.hero {
+    margin-top: 153px;
+}
+
+.hero__title {
+    padding-top: 46px;
+    padding-bottom: 116px;
+    display: flex;
+    justify-content: center;
+}
+
+.hero__title-h1 {
+    font-family: "MursGothic", sans-serif;
+    font-weight: 500;
+    font-size: 72px;
+    line-height: 126%;
+    text-align: center;
+}
+
+.text__img {
+    position: relative;
+}
+
+.text__img::after {
+    content: "";
+    position: absolute;
+    width: 152px;
+    height: 152px;
+    left: calc(100%);
+    top: -120%;
+    background: url("../../img/hero/money.png")
+}
+
+.text__bg {
+    position: relative;
+    z-index: 1;
+}
+
+.text__bg::before {
+    content: "";
+    position: absolute;
+    width: calc(100% + 4px);
+    height: 160%;
+    left: -2px;
+    bottom: -10px;
+    transform: rotate(-1deg);
+    z-index: -1;               
+    background: var(--accent);
+}
+
+.text__line {
+    border-bottom: solid 8px;
+    border-color: var(--accent);
+}
+
+
+
+.title__desc {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+
+    color: var(--text-color-gray);
+    font-size: 24px;
+}
+
+.title__desc-tag {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-width: 450px;
+
+    p {
+        line-height: 1;
+        text-align: center;
+        border: 2px solid #726F6F;
+        border-radius: 40px;
+        padding: 16px 22px;
+    }
+}
