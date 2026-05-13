@@ -21,7 +21,6 @@
 		"gulp-replace": "^1.1.4",
 		"gulp-sass": "^5.1.0",
 		"gulp-sass-glob": "^1.1.0",
-		"gulp-server-livereload": "^1.9.2",
 		"gulp-sourcemaps": "^3.0.0",
 		"gulp-svg-sprite": "^2.0.3",
 		"gulp-ttf2woff2": "^4.0.1",
@@ -47,6 +46,7 @@
 		"@fancyapps/fancybox": "^3.5.7",
 		"@fancyapps/ui": "^5.0.35",
 		"avif-webp-checker": "^1.0.0",
+		"browser-sync": "^3.0.4",
 		"swiper": "^11.0.6"
 	}
 }

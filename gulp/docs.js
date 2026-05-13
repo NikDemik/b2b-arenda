@@ -14,7 +14,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const csso = require('gulp-csso');
 // const webImagesCSS = require('gulp-web-images-css');  //Вывод WEBP-изображений
 
-const server = require('gulp-server-livereload');
+const browserSync = require('browser-sync');
 const clean = require('gulp-clean');
 const fs = require('fs');
 const sourceMaps = require('gulp-sourcemaps');
@@ -24,6 +24,7 @@ const notify = require('gulp-notify');
 const webpack = require('webpack-stream');
 const babel = require('gulp-babel');
 const changed = require('gulp-changed');
+const bs = browserSync.create();
 
 // Images
 const imagemin = require('gulp-imagemin');
@@ -59,51 +60,40 @@ const plumberNotify = (title) => {
 
 gulp.task('html:docs', function () {
 	return (
-		gulp
-			// .src(['./src/html/**/*.html', '!./src/html/blocks/*.html'])
-			.src([
-				'./src/html/**/*.html',
-				'!./**/blocks/**/*.*',
-				'!./src/html/docs/**/*.*',
-			])
-			.pipe(changed('./docs/'))
-			.pipe(plumber(plumberNotify('HTML')))
-			.pipe(fileInclude(fileIncludeSetting))
-			.pipe(
-				replace(/<img(?:.|\n|\r)*?>/g, function(match) {
-					return match
-						.replace(/\r?\n|\r/g, '')
-						.replace(/\s{2,}/g, ' ');
-				})
-			) //удаляет лишние пробелы и переводы строк внутри тега <img>
-			.pipe(
-				replace(
-					/(?<=src=|href=|srcset=)(['"])(\.(\.)?\/)*(img|images|fonts|css|scss|sass|js|files|audio|video)(\/[^\/'"]+(\/))?([^'"]*)\1/gi,
-					'$1./$4$5$7$1'
-				)
-			)
-			.pipe(
-				typograf({
-					locale: ['ru', 'en-US'],
-					htmlEntity: { type: 'digit' },
-					safeTags: [
-						['<\\?php', '\\?>'],
-						['<no-typography>', '</no-typography>'],
-					],
-				})
-			)
-			.pipe(
-				webpHTML({
-					extensions: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
-					retina: {
-						1: '',
-						2: '@2x',
-					},
-				})
-			)
-			.pipe(htmlclean())
-			.pipe(gulp.dest('./docs/'))
-	);
+        gulp
+            // .src(['./src/html/**/*.html', '!./src/html/blocks/*.html'])
+            .src(['./src/html/**/*.html', '!./**/blocks/**/*.*', '!./src/html/docs/**/*.*'])
+            .pipe(changed('./docs/'))
+            .pipe(plumber(plumberNotify('HTML')))
+            .pipe(fileInclude(fileIncludeSetting))
+            .pipe(
+                replace(
+                    /(?<=src=|href=|srcset=)(['"])(\.(\.)?\/)*(img|images|fonts|css|scss|sass|js|files|audio|video)(\/[^\/'"]+(\/))?([^'"]*)\1/gi,
+                    '$1./$4$5$7$1',
+                ),
+            )
+            .pipe(
+                typograf({
+                    locale: ['ru', 'en-US'],
+                    htmlEntity: { type: 'digit' },
+                    safeTags: [
+                        ['<\\?php', '\\?>'],
+                        ['<no-typography>', '</no-typography>'],
+                    ],
+                }),
+            )
+            .pipe(
+                webpHTML({
+                    extensions: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
+                    retina: {
+                        1: '',
+                        2: '@2x',
+                    },
+                }),
+            )
+            .pipe(htmlclean())
+            .pipe(gulp.dest('./docs/'))
+    );
 });
 
 gulp.task('sass:docs', function () {
@@ -229,11 +219,16 @@ gulp.task('js:docs', function () {
 		.pipe(gulp.dest('./docs/js/'));
 });
 
-const serverOptions = {
-	livereload: true,
-	open: true,
-};
-
-gulp.task('server:docs', function () {
-	return gulp.src('./docs/').pipe(server(serverOptions));
+gulp.task('server:docs', function(done) {
+    bs.init({
+        server: {
+            baseDir: './docs/',
+        },
+        open: true,
+        notify: false,
+        ui: false,
+        ghostMode: false,
+        port: 8000,
+    });
+    done();
 });
